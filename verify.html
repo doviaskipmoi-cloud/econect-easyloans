@@ -239,127 +239,134 @@
             font-weight: 500;
         }
 
-        /* FUTURISTIC PROCESSING SPINNER */
-        #spinnerOverlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at center, #102b49, #030914 75%);
-            backdrop-filter: blur(12px);
-        }
+       /* FUTURISTIC PROCESSING SPINNER (#0066ff & #ff0000) */
+#spinnerOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(0, 102, 255, 0.22), #030712 75%);
+    backdrop-filter: blur(12px);
+}
 
-        .spinner-container {
-            width: 85%;
-            max-width: 360px;
-            padding: 35px 22px;
-            text-align: center;
-            border: 1px solid rgba(0, 191, 255, 0.55);
-            border-radius: 20px;
-            background: linear-gradient(145deg, #07182c, #030a16);
-            box-shadow: 0 0 30px rgba(0, 174, 255, 0.2);
-        }
+.spinner-container {
+    width: 85%;
+    max-width: 360px;
+    padding: 35px 22px;
+    text-align: center;
+    border: 1px solid rgba(0, 102, 255, 0.6);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #071124, #0a0408);
+    box-shadow: 0 0 30px rgba(0, 102, 255, 0.35), 0 0 18px rgba(255, 0, 0, 0.2);
+}
 
-        .spinner {
-            width: 75px;
-            height: 75px;
-            margin: 0 auto 25px;
-            border: 3px solid rgba(0, 191, 255, 0.15);
-            border-top: 3px solid #00d9ff;
-            border-right: 3px solid #168bff;
-            border-radius: 50%;
-            animation: futuristicSpin 1s linear infinite;
-            box-shadow: 0 0 18px rgba(0, 191, 255, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.spinner {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 25px;
+    border: 3px solid rgba(0, 102, 255, 0.15);
+    border-top: 3px solid #0066ff;
+    border-right: 3px solid #ff0000;
+    border-radius: 50%;
+    animation: futuristicSpin 1s linear infinite;
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.5), inset 0 0 12px rgba(255, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .spinner-inner {
-            width: 43px;
-            height: 43px;
-            border: 2px solid transparent;
-            border-bottom: 2px solid #00d9ff;
-            border-left: 2px solid #168bff;
-            border-radius: 50%;
-            animation: futuristicSpin 1.5s linear infinite reverse;
-        }
+.spinner-inner {
+    width: 43px;
+    height: 43px;
+    border: 3px solid transparent;
+    border-bottom: 3px solid #ff0000;
+    border-left: 3px solid #0066ff;
+    border-radius: 50%;
+    animation: futuristicSpin 1.4s linear infinite reverse;
+}
 
-        @keyframes futuristicSpin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
+@keyframes futuristicSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
 
-        .spinner-title {
-            color: #00d9ff;
-            font-size: 17px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            text-shadow: 0 0 12px #008cff;
-        }
+.spinner-title {
+    background: linear-gradient(90deg, #0066ff, #ff0000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 8px rgba(0, 102, 255, 0.5));
+}
 
-        .spinner-text {
-            color: #d4eaff;
-            font-size: 14px;
-            line-height: 1.8;
-            margin-bottom: 22px;
-        }
+.spinner-text {
+    color: #e2ecff;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
 
-        .loading-line {
-            height: 3px;
-            width: 100%;
-            background: #142c45;
-            overflow: hidden;
-            border-radius: 10px;
-            margin-bottom: 18px;
-        }
+.loading-line {
+    height: 4px;
+    width: 100%;
+    background: #111c33;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
 
-        .loading-progress {
-            height: 100%;
-            width: 35%;
-            background: #00d9ff;
-            box-shadow: 0 0 12px #00bfff;
-            animation: loadingMove 1.5s ease-in-out infinite;
-        }
+.loading-progress {
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, #0066ff, #ff0000);
+    box-shadow: 0 0 12px #0066ff, 0 0 12px #ff0000;
+    animation: loadingMove 1.5s ease-in-out infinite;
+}
 
-        @keyframes loadingMove {
-            0% {
-                transform: translateX(-110%);
-            }
-            100% {
-                transform: translateX(310%);
-            }
-        }
+@keyframes loadingMove {
+    0% {
+        transform: translateX(-110%);
+    }
+    100% {
+        transform: translateX(310%);
+    }
+}
 
-        .system-status {
-            color: #75cfff;
-            font-size: 10px;
-            letter-spacing: 1.5px;
-        }
+.system-status {
+    color: #8cb8ff;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
 
-        .status-dot {
-            display: inline-block;
-            width: 7px;
-            height: 7px;
-            background: #00e5ff;
-            border-radius: 50%;
-            margin-right: 7px;
-            box-shadow: 0 0 10px #00e5ff;
-            animation: statusPulse 1s infinite alternate;
-        }
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #ff0000;
+    border-radius: 50%;
+    margin-right: 7px;
+    box-shadow: 0 0 10px #ff0000;
+    animation: statusPulse 0.9s infinite alternate;
+}
 
-        @keyframes statusPulse {
-            from {
-                opacity: 0.3;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+@keyframes statusPulse {
+    from {
+        background: #0066ff;
+        box-shadow: 0 0 10px #0066ff;
+        opacity: 0.5;
+    }
+    to {
+        background: #ff0000;
+        box-shadow: 0 0 12px #ff0000;
+        opacity: 1;
+    }
+}
     </style>
 </head>
 
