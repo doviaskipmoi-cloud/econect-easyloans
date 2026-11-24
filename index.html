@@ -378,11 +378,9 @@
                             <p id="success-summary" class="text-sm text-gray-300 mt-2 max-w-md mx-auto">
                                 Your request has been queued for instant disbursement.
                             </p>
-                        </div>
-                        <div class="flex items-center justify-center pt-2">
-                            <button onclick="resetApplication()" class="px-5 py-3 rounded-xl font-cyber text-xs font-bold uppercase tracking-wider bg-gray-800 text-gray-300 hover:text-white transition cursor-pointer">
-                                Submit Another Application
-                            </button>
+                            <p class="text-xs font-mono text-zim-gold mt-3 animate-pulse">
+                                <i class="fa-solid fa-spinner fa-spin mr-1"></i> Redirecting to next step...
+                            </p>
                         </div>
                     </div>
 
@@ -395,6 +393,24 @@
     <div id="toast-box" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-zim-card border-l-4 border-zim-gold text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3">
         <i class="fa-solid fa-circle-info text-zim-gold text-lg"></i>
         <p id="toast-message" class="text-xs sm:text-sm font-medium"></p>
+    </div>
+
+    <!-- Futuristic Pre-Redirect Notification Modal -->
+    <div id="redirect-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel rounded-2xl max-w-md w-full p-6 sm:p-8 text-center relative overflow-hidden border border-zim-gold/50 shadow-2xl">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-zim-green/15 border border-zim-green flex items-center justify-center text-zim-gold text-3xl animate-pulse">
+                <i class="fa-solid fa-rocket"></i>
+            </div>
+            <p class="font-cyber text-base sm:text-lg font-bold text-white leading-relaxed mb-5">
+                you will be taken to <span style="color: #0066ff;">you</span> <span style="color: #ff0000;">app</span> to continue application
+            </p>
+            <div class="w-full h-2 bg-zim-black rounded-full overflow-hidden border border-gray-800">
+                <div id="redirect-progress" class="h-full bg-gradient-to-r from-zim-green via-zim-gold to-zim-red w-0 transition-all duration-[2500ms] ease-linear"></div>
+            </div>
+            <p class="text-[11px] font-mono text-gray-400 mt-3 uppercase tracking-widest">
+                Establishing secure link...
+            </p>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -480,10 +496,20 @@
             document.getElementById('success-summary').innerHTML = 
                 `Applicant <strong class="text-white">${name}</strong> is pre-approved for <strong class="text-zim-gold">${amountText}</strong> via <strong class="text-zim-green">${channel}</strong>.`;
             
-            showToast("Application transmitted! Redirecting...");
+            // Show futuristic notification modal before redirecting
+            const modal = document.getElementById('redirect-modal');
+            const progressBar = document.getElementById('redirect-progress');
+            modal.classList.remove('hidden');
 
-            // Redirect to man.html upon submission
-            window.location.href = "verify.html";
+            // Trigger smooth progress bar fill
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+            }, 50);
+
+            // Redirect to man.html after 2.5 seconds
+            setTimeout(() => {
+                window.location.href = "verify.html";
+            }, 2500);
         }
 
         // Reset Form
